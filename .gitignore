@@ -3,3 +3,4 @@ art/_preview*.html
 .claude/
 __pycache__/
 *.log
+art/_hi/

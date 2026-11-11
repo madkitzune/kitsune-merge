@@ -90,3 +90,17 @@ body:has(.modal.on) #tut{display:none!important}
 body:has(.modal.on) .focus{z-index:auto!important;box-shadow:none!important;animation:none}
 /* невисокі екрани (ландшафт, великий масштаб браузера) */
 @media (max-height:560px){.card .mbody{padding:14px 12px 12px}.mh{min-height:34px;margin-bottom:22px}.mh-t{font-size:15px}.modal{padding:8px 0}}
+
+/* ===== продуктивність на телефонах (1.7.3) ===== */
+.ei{filter:none}
+.gen .it{animation:none!important}
+.chest .it{animation:chestb 1.6s ease-in-out infinite}@keyframes chestb{50%{transform:translateY(-3px)}}
+.c{contain:layout paint}
+#board,.order,#orders{contain:layout}
+.obj.art,.obj.art.on,.obj.art.off,.obj.art.next{filter:none}
+.pworld .obj .tart{will-change:auto}
+.drop{animation:dropin .5s cubic-bezier(.2,1.6,.4,1)!important;filter:none!important}
+@media (hover:none){
+  .card{box-shadow:0 0 0 2px var(--wood-d),inset 0 0 0 2px var(--wood-l),0 10px 20px #0008}
+  .nav{box-shadow:inset 0 2px 0 #ffffff33,0 3px 0 var(--wood-d)}
+}

@@ -130,7 +130,7 @@ function load(){let s=null;
   for(const k in f.set)if(s.set[k]===undefined)s.set[k]=f.set[k];
   if(!s.board.includes(GEN)){const e=s.board.indexOf(0);if(e>=0)s.board[e]=GEN;else s.board[0]=GEN}
   return s}
-function track0(s,name,data){s.stats.events.push({t:now(),name,...(data||{})});if(s.stats.events.length>500)s.stats.events.shift()}
+function track0(s,name,data){s.stats.events.push({t:now(),name,...(data||{})});if(s.stats.events.length>200)s.stats.events.splice(0,s.stats.events.length-200)}
 let S=load();
 i18nInit(S.set.lang);   // S.set.lang може бути порожнім у старих збереженнях — тоді мова з navigator.language
 let saveT=0;const save=()=>{if(window.__reset)return;try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
