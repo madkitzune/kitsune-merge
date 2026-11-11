@@ -106,6 +106,21 @@ Foxes and koi no longer appear all at once from a quest. Each one is assembled f
 - **Duplicates are never wasted.** A shard of a pet you already own turns into friendship (+15), which levels up its passive.
 - **Album.** A locked pet shows as a silhouette with a shard bar, and its name appears after the first shard. This is the "almost there" pull that card collections use, without needing a server for trading.
 
+### Festivals with mini-games (v2.0)
+Every 3 days a new festival opens with its own mini-game. Each mini-game is in a different genre from merge, which gives variety without touching the core loop:
+
+| Mini-game | Genre | Rules |
+|---|---|---|
+| Lantern Catch | arcade | Move the basket, catch lanterns (+10, golden +30), dodge thorn balls (3 lives), 30 s, speed ramps up |
+| Koi Pairs | memory | 16 cards, 8 pairs, 60 s. Score = pairs + combo + time left |
+| Bell Rhythm | rhythm | 20 rings shrink onto the bell. Tap on the beat: perfect / good / miss, with a combo |
+
+- **Tickets (🏮).** 3 free every day, +1 per 3 orders, +2 for a rewarded ad. One play costs one ticket. Tickets turn regular merge play into festival access, so the event feeds the core loop instead of competing with it.
+- **Rewards.**
+  - Each play gives shards of the **festival hero** (a pet the player does not own yet): 1 per 60 points, up to 4.
+  - Festival points fill a 5-step track (100 → 1000): random shards, food, hero shards, gems, and a **skin** at the end.
+- **Why.** It is a return reason on a 3-day rhythm, a target for a specific pet, and a showcase for skins. Hypothesis to test: festival participants have higher D7 than non-participants with the same D1 activity (watch out for selection bias, so roll the festival out to only half of the players).
+
 ### Monetisation systems (v1.9, demo payments)
 | System | Rules | Why it is there |
 |---|---|---|
@@ -141,6 +156,7 @@ Guardrails I would watch: D1/D7 retention (offers must not feel pushy, hence one
 - **Meta:** `temple_open`, `temple_build_N`, `temple_tap`, `temple_reward`, `meadow_open`, `pond_open`, `pet_unlock`, `pet_feed`, `decor_buy`
 - **Monetisation:** `ad_rewarded{id}`, `iap_demo{id}`, `offer_shown{id}`, `offer_buy{id}`, `piggy_break{g}`, `pass_tier{n}`, `pass_claim`, `pass_premium`, `sub_start`, `sub_daily`, `frag_pack`, `booster{k}`, `upgrade{k,lv,cost}`
 - **Collection:** `frags{n,src}`, `pet_unlock{id,src}`
+- **Events:** `event_play{g}`, `event_score{g,score,shards}`, `event_claim{i}`
 - **Retention:** `session_start` / `session_end` (playtime), `daily_claim{day}`, D1/D7 return computed from the active days
 
 ### KPI targets for a soft-launch test (casual merge benchmarks)
