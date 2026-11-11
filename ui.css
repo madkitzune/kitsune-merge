@@ -176,3 +176,13 @@ img.sil{filter:brightness(0) opacity(.55)}
 .pcard.fraglock .pi img{max-height:100%;max-width:100%;width:auto;height:auto;object-fit:contain}
 .reveal .pe.big img.sil{max-height:140px;width:auto}
 .lvl .chip,.lvl .icon{flex:none}
+
+/* ===== компактна верхня панель (1.9.2): досвід — кільце навколо аватара, налаштування — у профілі ===== */
+#bSet{display:none}
+.lvl .xpbar{display:none}
+.ava-img{background:conic-gradient(var(--leaf) calc(var(--xp,0)*1%),var(--paper3) 0)!important;padding:4px!important}
+.lvl{justify-content:flex-end;gap:6px;margin:4px 0 6px;min-height:30px}
+.lvl .icon.med,.lvl #bPass{width:30px;height:30px}
+#chipTemple{height:28px;padding:0 10px;font-size:13px}
+#chipTemple small{font-size:10px;color:var(--ink3);margin-left:1px}
+.top{gap:4px}

@@ -308,9 +308,9 @@ addEventListener('resize',()=>{fitBoard();if(templeOpen)renderTemple();if(typeof
 function render(popIdx,popCls='pop'){regen();
   {const av=document.querySelector('.ava-img span');if(av&&HOSHI.base&&!av.dataset.src){av.dataset.src=HOSHI.base;av.innerHTML=`<img src="${HOSHI.base}" alt="" style="width:100%;height:100%;object-fit:cover;object-position:50% 12%;border-radius:50%">`}}
   $('en').textContent=S.en+'/'+enMax();$('co').textContent=S.co;$('ge').textContent=S.ge;$('lv').textContent=S.lv;
-  const need=CFG.xpToLevel(S.lv);$('xp').style.width=(S.xp/need*100)+'%';$('xptxt').textContent=S.xp+'/'+need;
+  const need=CFG.xpToLevel(S.lv);$('xp').style.width=(S.xp/need*100)+'%';document.documentElement.style.setProperty('--xp',Math.round(S.xp/need*100));$('xptxt').textContent=S.xp+'/'+need;
   $('icEn').innerHTML=U('energy');$('icCo').innerHTML=U('coin');$('icGe').innerHTML=U('gem');
-  const nb=TEMPLE[S.temple];$('chipTemple').innerHTML=`⛩️ ${S.temple}/${TEMPLE.length} · ⭐${S.stars}`;
+  const nb=TEMPLE[S.temple];$('chipTemple').innerHTML=nb?`⭐ ${S.stars}<small>/${nb.st}</small>`:`⭐ ${S.stars}`;
   $('chipTemple').classList.toggle('ready',!!nb&&S.stars>=nb.st&&S.co>=nb.co);
   $('chipBless').style.display=blessOn()?'flex':'none';
   $('dotQ').classList.toggle('on',!!questReady());$('dotD').classList.toggle('on',S.daily.last!==today());
