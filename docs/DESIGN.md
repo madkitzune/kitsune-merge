@@ -195,23 +195,27 @@ Sample size: to detect +2 pp on D1 from a 35% baseline (α = 0.05, power 0.8) ne
 
 ## 7. How it was built with AI
 
-| Part | Me | AI | Tools |
-|---|---|---|---|
-| Concept, loop, economy, formulas, metrics, cut list | ✔ | discussion partner | Claude |
-| Code: about 215 KB of JS/CSS, no engine, PWA/offline, 3 languages | spec, review, playtesting, bug reports | implementation, refactors, bug fixes | Claude Code (agents for sub-tasks) |
-| Art: buildings, scenes, pets, food, items | art direction, prompts, choosing between variants, rejecting weak ones | generation; auto cut-out with scripts I specified | Pollinations (flux), Python/PIL pipeline in `art/_src/` |
-| UI icons (29), SVG fallbacks | style brief | generated as code | Claude Code |
-| Voice of Grandma Hoshi (11 lines) | casting (picked a designed voice out of the variants), script | voice design + TTS | ElevenLabs v3 |
-| Localisation uk / ru / en | review | translation + i18n refactor | Claude Code subagent |
+This is the honest split. I worked as **producer and game director**: I set the goal and direction, chose between options, playtested and decided what changes. Claude Code was the **builder and design co-author**: it proposed concrete systems and numbers, wrote all the code and made the art.
 
-**Development flow.** Spec → AI build → play on the phone → write down what feels wrong → narrow it down to one change → AI fix → replay. Art goes through `generate N seeds → contact sheet → pick → auto-clean → in-game check`.
+| Area | Me | AI (Claude Code + tools) |
+|---|---|---|
+| Goal and format | Portfolio piece for an AI-first game designer role. Mobile casual, built in a few days | — |
+| Direction of features | Selectable themes; story tutorial with Grandma Hoshi; temple meta; pets with quests, food and skins; a separate home for foxes (the Fishdom aquarium as a reference); koi living in the spring; festivals with mini-games in other genres; player profile; mobile version | Turned each request into a concrete system with rules |
+| Key decisions | Picked from the proposed options: narrow and polish instead of more features; the "warm paper & wood" UI; pets unlocked only from their own shards (I rejected a card album); applying the balance fix; GitHub Pages | Proposed the options and recommended one |
+| Playtesting and problems | Played on PC and phone. Found that it felt like a beginner's project; buildings looked pasted on; the temple built too fast; the HUD was overloaded; lag on phones; progress seemed lost after a reload; Hoshi was covered by her own text; weak sprites | Diagnosed each cause and fixed it (for example, a CSS class clash, a tutorial restarting from step 1, 15 MB of art) |
+| Numbers and economy | Reviewed and accepted | Formulas, balance table, Monte Carlo model (`tools/economy_sim.py`), temple costs, pass / piggy bank / offer rules |
+| Metrics and tests | — | Event taxonomy, KPI thresholds (typical casual benchmarks), A/B hypotheses, sample size |
+| Code | — | All of it: about 215 KB of JS/CSS, no engine, PWA, 3 languages, plus agents for sub-tasks (localisation, research) |
+| Art | Style references; rejected weak results ("too childish", "too flashy") | Prompts, generation (Pollinations flux), picking variants, auto cut-out and compression |
+| Voice | Chose a grandmother voice over a male one, picked the variant | Script, voice design and TTS (ElevenLabs v3) |
+| Tooling | Found the gamedev skills pack and API keys | Reviewed the skills and installed the useful ones |
 
-**What AI did badly and how I handled it.**
-- Image models ignore "no base platform". I softened the plates with a mask in the engine instead of burning tokens on regeneration.
-- Generated pieces drift in style between batches. I fixed one style prompt for all of them.
-- The first build was feature-heavy and unpolished. The fix was not more features but a narrowing pass and a game-feel pass ([`feel.js`](../feel.js)).
+**Development flow.** Goal → AI proposes 2–3 options with a recommendation → I pick → AI builds → I play it on the phone → I write down what feels wrong → AI diagnoses and fixes → repeat. Art goes through `generate → contact sheet → pick → auto-clean → in-game check`.
 
----
+**What did not work at first, and how it was handled.**
+- Image models ignore "no base platform". The plates were softened with a mask in the engine instead of spending tokens on regeneration.
+- The first build was feature-heavy and felt like a student project. The fix was not more features: we did a narrowing pass and a game-feel pass ([`feel.js`](../feel.js)).
+- The economy model showed the shipped v1.0 balance would stall around level 10. The formulas were changed before anyone hit that wall.
 
 ## 8. What's next (if the test numbers come in)
 1. Put the v1.0 order formulas behind a flag as the control arm and run A/B #1 on the v1.6 balance.
