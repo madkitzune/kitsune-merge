@@ -71,7 +71,7 @@ function evDot() { const d = $('dotE'); if (d) d.classList.toggle('on', S.tut >=
 /* ---------- хаб фестивалю ---------- */
 function festival() {
   const e = evState(), g = evGame(e.id);
-  let h = hdr(EVICON[g], T('Фестиваль') + ': ' + T(EVNAME[g]), T('Ще {t}', { t: evLeft() })) + `
+  let h = `<div class="ev-banner" style="background-image:url('art/ev/banner_${g}.webp')"><div class="ev-bt"><small>${T('Фестиваль')}</small><b>${T(EVNAME[g])}</b></div><span class="ev-left">⏱ ${T('Ще {t}', { t: evLeft() })}</span></div>
     <div class="ev-hero"><div class="ev-pet">${fragIcon(e.hero)}</div><div style="flex:1"><small>${T('Герой фестивалю')}</small>
       <div class="up-n">${PS().own[e.hero] || fragHave(e.hero) ? T(PETS[e.hero].name) : '???'}</div><small>${T(EVDESC[g])}</small></div></div>
     <div class="ev-play"><div class="ev-tix">🏮 <b>${e.tickets}</b><small>${T('Квитки')}</small></div>
@@ -98,9 +98,9 @@ window.evPlay = () => {
 
 /* ---------- каркас міні-гри: повноекранний шар ---------- */
 let miniEnd = null;
-function miniOpen(title) {
+function miniOpen(title, g) {
   let m = $('mini'); if (!m) { m = document.createElement('div'); m.id = 'mini'; document.body.appendChild(m); }
-  m.innerHTML = `<div class="mi-top"><div class="mi-t">${title}</div><div class="mi-s">${T('Очки')}: <b id="miScore">0</b></div><div class="mi-s">⏱ <b id="miTime"></b></div></div><div id="miField"></div>`;
+  m.innerHTML = `<div class="mi-top"><div class="mi-t">${title}</div><div class="mi-s">${T('Очки')}: <b id="miScore">0</b></div><div class="mi-s">⏱ <b id="miTime"></b></div></div><div id="miField" class="g-${g || ''}"></div>`;
   m.classList.add('on');
   return $('miField');
 }
@@ -129,12 +129,15 @@ const setScore = s => { const e = $('miScore'); if (e) e.textContent = Math.roun
 
 /* ---------- 1. Ловля ліхтариків (аркада) ---------- */
 function gameCatch() {
-  const f = miniOpen('🏮 ' + T('Ловля ліхтариків'));
+  const f = miniOpen('🏮 ' + T('Ловля ліхтариків'), 'catch');
   const cv = document.createElement('canvas'); f.appendChild(cv);
   const W = cv.width = f.clientWidth * devicePixelRatio, H = cv.height = f.clientHeight * devicePixelRatio, k = devicePixelRatio;
   const ctx = cv.getContext('2d');
   const img = src => { const i = new Image(); i.src = src; return i; };
-  const LANT = img('art/ui/lantern.svg'), STAR = img('art/ui/star.svg'), FOX = img(PETART.fox_gather || 'art/ui/fox.svg');
+  const pick2 = (a, b) => { const i = img(a); i.onerror = () => { i.src = b; }; return i; };
+  const LANT = pick2('art/ev/lantern.png', 'art/ui/lantern.svg'), GOLD = pick2('art/ev/lantern_gold.png', 'art/ui/star.svg'), THORN = img('art/ev/thorn.png'),
+    BASKET = img('art/ev/basket.png'), HEART = img('art/ui/heart.svg'), FOX = img(PETART.fox_gather || 'art/ui/fox.svg');
+  let fx = [];
   let bx = W / 2, score = 0, lives = 3, items = [], last = 0, spawn = 0;
   const bw = 90 * k, by = H - 70 * k;
   const move = e => { const r = cv.getBoundingClientRect(); bx = Math.max(bw / 2, Math.min(W - bw / 2, (e.clientX - r.left) * k)); };
@@ -146,29 +149,37 @@ function gameCatch() {
     ctx.clearRect(0, 0, W, H);
     items.forEach(it => {
       it.y += it.v * dt; const s = 34 * k;
-      if (it.t === 'bad') { ctx.fillStyle = '#5a3a5a'; ctx.beginPath(); for (let a = 0; a < 16; a++) { const r2 = a % 2 ? s * .25 : s * .5, an = a / 16 * 6.283; ctx.lineTo(it.x + Math.cos(an) * r2, it.y + Math.sin(an) * r2); } ctx.fill(); }
-      else ctx.drawImage(it.t === 'gold' ? STAR : LANT, it.x - s / 2, it.y - s / 2, s, s);
+      if (it.t === 'bad' && THORN.complete && THORN.naturalWidth) ctx.drawImage(THORN, it.x - s * .6, it.y - s * .6, s * 1.2, s * 1.2);
+      else if (it.t === 'bad') { ctx.fillStyle = '#5a3a5a'; ctx.beginPath(); for (let a = 0; a < 16; a++) { const r2 = a % 2 ? s * .25 : s * .5, an = a / 16 * 6.283; ctx.lineTo(it.x + Math.cos(an) * r2, it.y + Math.sin(an) * r2); } ctx.fill(); }
+      else { ctx.save(); ctx.shadowColor = it.t === 'gold' ? '#ffd166' : '#ff8a4a'; ctx.shadowBlur = 18 * k; ctx.drawImage(it.t === 'gold' ? GOLD : LANT, it.x - s * .6, it.y - s * .7, s * 1.2, s * 1.4); ctx.restore(); }
       if (it.y > by - 20 * k && it.y < by + 20 * k && Math.abs(it.x - bx) < bw / 2) {
         it.dead = true;
         if (it.t === 'bad') { lives--; SFX.err(); vib(30); if (lives <= 0) { stop(); miniFinish(score); } }
-        else { score += it.t === 'gold' ? 30 : 10; SFX.coin(); setScore(score); }
+        else { const v = it.t === 'gold' ? 30 : 10; score += v; SFX.coin(); setScore(score);
+          for (let q = 0; q < 10; q++) fx.push({ x: it.x, y: it.y, vx: (Math.random() - .5) * 300 * k, vy: (-Math.random() * 260 - 60) * k, l: .6, c: it.t === 'gold' ? '#ffd166' : '#ffb07a' });
+          fx.push({ x: it.x, y: it.y - 20 * k, vx: 0, vy: -60 * k, l: .8, txt: '+' + v }); }
       }
       if (it.y > H + 40) it.dead = true;
     });
     items = items.filter(i => !i.dead);
-    ctx.fillStyle = '#9a5d32'; ctx.beginPath(); ctx.roundRect(bx - bw / 2, by, bw, 26 * k, 10 * k); ctx.fill();
-    if (FOX.complete) ctx.drawImage(FOX, bx - 30 * k, by - 58 * k, 60 * k, 60 * k);
-    ctx.font = `${18 * k}px sans-serif`; ctx.fillText('❤'.repeat(lives), 10 * k, 26 * k);
+    fx.forEach(p => { p.l -= dt; p.x += p.vx * dt; p.y += p.vy * dt; p.vy += 500 * k * dt; ctx.globalAlpha = Math.max(0, p.l / .6);
+      if (p.txt) { ctx.font = `900 ${20 * k}px Nunito,sans-serif`; ctx.fillStyle = '#fff'; ctx.strokeStyle = '#6b3d1d'; ctx.lineWidth = 4 * k; ctx.strokeText(p.txt, p.x - 14 * k, p.y); ctx.fillText(p.txt, p.x - 14 * k, p.y); }
+      else { ctx.fillStyle = p.c; ctx.beginPath(); ctx.arc(p.x, p.y, 4 * k, 0, 6.283); ctx.fill(); } ctx.globalAlpha = 1; });
+    fx = fx.filter(p => p.l > 0);
+    if (FOX.complete) ctx.drawImage(FOX, bx - 34 * k, by - 66 * k, 68 * k, 68 * k);
+    if (BASKET.complete && BASKET.naturalWidth) ctx.drawImage(BASKET, bx - bw / 2 - 6 * k, by - 16 * k, bw + 12 * k, 52 * k);
+    else { ctx.fillStyle = '#9a5d32'; ctx.beginPath(); ctx.roundRect(bx - bw / 2, by, bw, 26 * k, 10 * k); ctx.fill(); }
+    for (let q = 0; q < 3; q++) { ctx.globalAlpha = q < lives ? 1 : .25; if (HEART.complete) ctx.drawImage(HEART, (10 + q * 30) * k, 10 * k, 26 * k, 26 * k); } ctx.globalAlpha = 1;
   }, () => miniFinish(score));
   miniEnd = stop;
 }
 
 /* ---------- 2. Пари коропів (пам'ять) ---------- */
 function gameMemory() {
-  const f = miniOpen('🐟 ' + T('Пари коропів'));
+  const f = miniOpen('🐟 ' + T('Пари коропів'), 'memory');
   const ids = [...Object.keys(PETS).filter(k => PETS[k].kind === 'koi'), 'fox_gather', 'fox_nine'];
   const deck = [...ids, ...ids].sort(() => Math.random() - .5);
-  f.innerHTML = `<div class="mm-grid">${deck.map((id, i) => `<button class="mm-c" data-i="${i}"><span class="mm-b"><img src="${PETART[id] || ''}" alt=""></span></button>`).join('')}</div>`;
+  f.innerHTML = `<div class="mm-grid">${deck.map((id, i) => `<button class="mm-c" data-i="${i}"><span class="mm-back"></span><span class="mm-b"><img src="${PETART[id] || ''}" alt=""></span></button>`).join('')}</div>`;
   let open = [], pairs = 0, score = 0, lock = false, combo = 0;
   const stop = miniTimer(60, null, () => miniFinish(score));
   miniEnd = stop;
@@ -187,7 +198,7 @@ function gameMemory() {
 
 /* ---------- 3. Ритм дзвону (ритм) ---------- */
 function gameRhythm() {
-  const f = miniOpen('🔔 ' + T('Ритм дзвону'));
+  const f = miniOpen('🔔 ' + T('Ритм дзвону'), 'rhythm');
   f.innerHTML = `<div class="rh-wrap"><div class="rh-bell"><img src="art/ui/bell.svg" alt=""></div><div class="rh-ring" id="rhRing"></div><div class="rh-fb" id="rhFb"></div><button class="rh-tap" id="rhTap"></button></div>`;
   const ring = $('rhRing'), fb = $('rhFb');
   const N = 20; let n = 0, score = 0, combo = 0, start = 0, dur = 1300, hit = false;
@@ -202,6 +213,7 @@ function gameRhythm() {
   $('rhTap').addEventListener('pointerdown', () => {
     if (hit) return; const p = (performance.now() - start) / dur, d = Math.abs(p - 1);
     hit = true;
+    const rp = document.createElement('div'); rp.className = 'rh-rip'; f.querySelector('.rh-wrap').appendChild(rp); setTimeout(() => rp.remove(), 600);
     if (d < .08) { combo++; score += 20 + combo * 2; show(T('Ідеально!'), 'perfect'); SFX.bell(); }
     else if (d < .2) { combo++; score += 10 + combo; show(T('Добре'), 'good'); SFX.lamp(2); }
     else { combo = 0; show(T('Мимо'), 'miss'); SFX.err(); }

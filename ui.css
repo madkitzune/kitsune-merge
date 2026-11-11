@@ -223,3 +223,31 @@ img.sil{filter:brightness(0) opacity(.55)}
 .rh-fb.on{opacity:1}.rh-fb.perfect{color:#ffd166}.rh-fb.good{color:#a8f58c}.rh-fb.miss{color:#ff8a8a}
 .rh-tap{position:absolute;inset:0;background:none;border:0;box-shadow:none;border-radius:0}
 .rh-tap:active{transform:none;box-shadow:none}
+
+/* ===== графіка фестивалів (2.0.1) ===== */
+.ev-banner{position:relative;height:140px;margin:-20px -14px 14px;border-radius:18px 18px 0 0;background:linear-gradient(135deg,var(--cin),var(--wood)) center/cover;overflow:hidden;box-shadow:inset 0 -60px 50px -20px #0009}
+.ev-bt{position:absolute;left:14px;bottom:12px;color:#fff;text-shadow:0 2px 6px #000a;display:flex;flex-direction:column;line-height:1.1}
+.ev-bt small{font-size:12px;opacity:.9;text-transform:uppercase;letter-spacing:1px}.ev-bt b{font:700 24px var(--fd)}
+.ev-left{position:absolute;right:52px;top:12px;background:#000a;color:#fff;border-radius:10px;padding:3px 9px;font-size:12px;font-weight:800}
+#miField{background:#1a2238 center/cover no-repeat}
+#miField.g-catch{background-image:url('art/ev/bg_catch.webp')}
+#miField.g-memory{background-image:url('art/ev/bg_memory.webp')}
+#miField.g-rhythm{background-image:url('art/ev/bg_rhythm.webp')}
+#miField.g-catch:before,#miField.g-memory:before,#miField.g-rhythm:before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,#0003,#0000 30%,#0004);pointer-events:none}
+#mini{background:radial-gradient(circle at 50% 0,#4a2a3a,#140b20)}
+.mm-c{position:relative;background:none;border:0;box-shadow:0 4px 10px #0007;transform-style:preserve-3d;transition:transform .25s}
+.mm-c .mm-back,.mm-c .mm-b{position:absolute;inset:0;border-radius:12px;backface-visibility:hidden}
+.mm-c .mm-back{background:url('art/ev/card_back.png') center/cover,linear-gradient(135deg,#c0281a,#7a1408);border:2px solid var(--gold-s)}
+.mm-c .mm-b{opacity:1;transform:rotateY(180deg);border:2px solid var(--wood);transition:none}
+.mm-c.up,.mm-c.done{transform:rotateY(180deg)}
+.mm-c.up .mm-b,.mm-c.done .mm-b{transform:rotateY(180deg)}
+.mm-c.done .mm-b{border-color:var(--leaf);box-shadow:0 0 14px #a8f58c}
+.rh-bell{width:140px;height:140px;background:radial-gradient(circle,#fff8e6,#f3e0b4);box-shadow:0 0 30px #ffd16688,0 6px 0 var(--wood-d)}
+.rh-ring{box-shadow:0 0 16px #ffd166,inset 0 0 16px #ffd16688}
+.rh-rip{position:absolute;left:50%;top:50%;width:140px;height:140px;margin:-70px 0 0 -70px;border-radius:50%;border:4px solid #fff;animation:rhrip .6s ease-out forwards;pointer-events:none}
+@keyframes rhrip{to{transform:scale(2.2);opacity:0}}
+.rh-fb{text-shadow:0 3px 0 #0008,0 0 12px #000}
+.mm-c{overflow:visible}
+#miField.g-catch:before{background:linear-gradient(180deg,#0a1030cc,#0a103099 60%,#0a103055)}
+#miField>canvas,#miField>.mm-grid,#miField>.rh-wrap{position:relative;z-index:1}
+#miField>.rh-wrap{position:absolute}
