@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="uk"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#140b20">
+<meta name="description" content="Kitsune Merge — затишна merge-гра: зливай дари, виконуй замовлення і відбудуй лисячий храм разом з бабусею Хоші.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Kitsune Merge">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>Kitsune Merge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&family=Rubik:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="temple.css">
+<link rel="stylesheet" href="pets.css">
+<link rel="stylesheet" href="scenes.css">
+<link rel="stylesheet" href="ui.css">
+</head><body>
+<div id="app">
+  <div class="top">
+    <div class="ava" onclick="settings()" title="Профіль і налаштування" data-i18n-title="Профіль і налаштування"><div class="ava-img"><span>🦊</span></div><div class="ava-lv" id="lv"></div></div>
+    <div class="caps">
+      <div class="res" id="rEn" onclick="offerEnergy()"><span class="ci" id="icEn">⚡</span><span class="cv"><span id="en"></span><small id="entimer"></small></span><i class="plus">+</i></div>
+      <div class="res" id="rCo" onclick="shopTab='up';shop()"><span class="ci" id="icCo">💰</span><span class="cv" id="co"></span><i class="plus">+</i></div>
+      <div class="res" id="rGe" onclick="shopTab='gem';shop()"><span class="ci" id="icGe">💎</span><span class="cv" id="ge"></span><i class="plus">+</i></div>
+    </div>
+    <button class="icon gear" id="bSet">⚙️</button>
+  </div>
+  <div class="lvl"><div class="bar xpbar"><i id="xp"></i><span id="xptxt"></span></div>
+    <div class="chip" id="chipBless" style="display:none">🔥×2 <span id="blessT"></span></div>
+    <div class="chip" id="chipTemple"></div>
+    <button class="icon med" id="bDaily">🎁<i class="dot" id="dotD"></i></button></div>
+  <div id="orders"></div>
+  <div id="boardWrap"><div id="board"></div></div>
+  <div class="nav">
+    <button class="nb" id="bTemple"><span class="i">⛩️</span><span class="l" data-i18n="Храм">Храм</span></button>
+    <button class="nb" id="bShop"><span class="i">🛒</span><span class="l" data-i18n="Лавка">Лавка</span></button>
+    <button class="nb" id="summon"><span class="i"><span class="hero" id="heroIc"></span></span><span class="l" data-i18n="Призвати">Призвати</span></button>
+    <button class="nb" id="bQuest"><span class="i">📜</span><span class="l" data-i18n="Завдання">Завдання</span><i class="dot" id="dotQ"></i></button>
+    <button class="nb" id="bAlbum"><span class="i">📖</span><span class="l" data-i18n="Альбом">Альбом</span></button>
+  </div>
+</div>
+
+<div id="temple" class="screen">
+  <div class="thead"><button class="icon" id="tBack">◀</button><div class="tt" data-i18n="⛩️ Храм">⛩️ Храм</div><div class="thud" id="thud"></div></div>
+  <div id="tscene" class="tscene"></div>
+  <div id="tpanel"></div>
+</div>
+
+<div id="meadow" class="screen">
+  <div class="thead"><button class="icon" id="mBack" onclick="closeMeadow()">◀</button><div class="tt" data-i18n="🦊 Галявина">🦊 Галявина</div><div class="thud" id="mhud"></div></div>
+  <div id="mscene" class="tscene pan"></div>
+  <div id="mpanel"></div>
+</div>
+
+<div id="pond" class="screen">
+  <div class="thead"><button class="icon" id="pBack" onclick="closePond()">◀</button><div class="tt" data-i18n="🐟 Джерело">🐟 Джерело</div><div class="thud" id="phud"></div></div>
+  <div id="pscene" class="pscene"></div>
+  <div id="ppanel"></div>
+</div>
+
+<div id="ghost"></div><div id="toast"></div><div id="combo"></div>
+<div class="modal" id="m"><div class="card" id="mc"></div></div>
+<div id="tut"><div class="box"><div class="por" id="tPor"></div><div class="bub"><div class="nm" id="tNm"></div><div class="tx" id="tTx"></div><button id="tNext" data-i18n="Далі ▸">Далі ▸</button></div></div></div>
+
+<div id="splash">
+  <div class="logo"><img src="art/logo.svg" alt="" style="width:1.4em;height:1.4em;display:block" onerror="this.parentNode.textContent='🦊'"></div>
+  <h1>Kitsune Merge</h1>
+  <p data-i18n="Відбудуй храм разом з бабусею Хоші">Відбудуй храм разом з бабусею Хоші</p>
+  <div class="ld"><i id="ldBar"></i></div>
+  <button id="playBtn" data-i18n="Грати">Грати</button>
+  <small data-i18n="v1.0">v1.0</small>
+</div>
+<script src="icons.js"></script>
+<script src="i18n.js"></script>
+<script src="pets.js"></script>
+<script src="scenes.js"></script>
+<script src="game.js"></script>
+<script src="feel.js"></script>
+</body></html>

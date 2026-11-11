@@ -1,0 +1,93 @@
+tier,item,coins_per_order_item (3*2.3^(t-1)),merge_xp,summons_to_build (2^(t-1)),coins_per_energy
+1,leaf,3,1,1,3.0
+2,sakura,7,2,2,3.5
+3,dango,16,3,4,4.0
+4,lantern,36,4,8,4.5
+5,bell,84,5,16,5.3
+6,torii,193,6,32,6.0
+7,fox,444,7,64,6.9
+8,moon,1022,8,128,8.0
+9,crystal,2350,9,256,9.2
+10,crown,5404,10,512,10.6
+
+level,xp_to_next (20*1.45^(l-1)),max_order_tier (min(6,3+l/3)),items_per_order (stars = sum ceil(tier/2)),gems_on_level_up,energy_on_level_up
+1,20,3,1,3,15
+2,29,3,1,3,15
+3,42,4,2,3,15
+4,61,4,2,3,15
+5,88,4,2,3,15
+6,128,5,3,3,15
+7,186,5,3,3,15
+8,269,5,3,3,15
+9,390,6,3,3,15
+10,566,6,3,3,15
+
+upgrade,base_cost,cost_mult,max_level,effect_per_level
+luck (chance of tier 2 on summon),120,1.7,8,+6%
+energy cap,150,1.8,6,+5 energy
+greed (order coins),180,1.9,10,+10%
+
+temple_building,stars,coins,gem_reward,interaction,cooldown_min,reward
+bridge,6,60,3,lore line,-,-
+stone lanterns,14,190,4,tap = light cascade,3,+4 energy
+torii gate,24,420,5,lore line; unlocks 2nd fox slot,-,-
+sacred tree,36,720,6,shake = leaves + items on board,4,"2x tier1 + 1x tier2, 60% food"
+spring + koi pond,50,1100,8,feed/ripple; unlocks pond (2 koi slots),2,"8+3*lv coins or 15% 1 gem; 35% food"
+great bell,66,1600,10,ring = sound + waves; 3rd fox slot; +1 pond slot,5,20+6*lv coins
+fire altar,84,2400,12,offer board item tier>=3 -> blessing; +1 pond slot,-,"x2 order coins for (tier+1) min"
+shrine,105,3500,20,chapter 1 ending; +1 pond slot,-,-
+spirits (wandering),-,-,-,drop coin/chest every 18s (max 3 on scene),-,"10+4*lv coins; 15% chest"
+
+pet,kind,rarity,source,passive per friendship level (1-5)
+fox_gather Збирайко,fox,common,story 1 (bridge),auto-collects temple drops every 2.5s
+fox_sleepy Соня,fox,common,story 3 (tier-6 item),+2 energy cap
+fox_luck Щасливчик,fox,rare,story 8 (bell),+5% chest chance on tier5+ merges
+fox_star Зорянка,fox,rare,story 11 (shrine),+8% chance of extra star per order
+fox_fire Вогник,fox,epic,story 9 (3 offerings),every 10 min +(4+lv) energy
+fox_nine Девʼятихвіст,fox,legendary,story 13 (level 15),+25% combo coins
+koi_red Червоний,koi,common,story 6 (spring),+20% pond coins
+koi_white Сніжний,koi,common,weekly / chest,+5% pond gem chance
+koi_gold Золотий,koi,rare,story 7 (level 8),+5% order coins
+koi_sage Мудрець,koi,rare,story 10 (level 12),+10% XP
+koi_moon Місячний,koi,epic,story 12 (25 feeds),night energy regen +10% faster
+koi_dragon Драконовий,koi,legendary,weekly / chest,+3% tier-2 summon chance
+
+pet_system,value
+friendship_for_level,"0 / 40 / 110 / 220 / 380"
+hunger_per_hour,8 (full 100 lasts ~12.5 h; hungry pet = no bonus only)
+sat_on_unlock,70
+fox_slots,"1, +1 at torii, +1 at bell"
+pond_slots,"0 until spring; 2, +1 bell, +1 altar, +1 shrine"
+favourite_food_mult,x2 (foxes: tempura/inari; koi: rice/senbei)
+food_drop_chance,"order 25% / chest 50% / tree 60% / pond 35%"
+chest_pet_chance,4% (common/rare locked)
+skin_cost_gems,30 (cosmetic only)
+
+food,satiety,drop_weight
+rice,10,30
+senbei,15,22
+onigiri,20,20
+tempura,25,14
+naruto,30,9
+inari,50,5
+
+economy,value
+energy_max,40
+energy_regen_sec,30
+energy_per_summon,1
+combo_bonus,"min(chain,5) * tier coins, window 1.6s"
+chest_chance,25% on tier5+ merges
+rewarded_ad_energy,10 (5/day)
+booster_refill_gems,8
+booster_automerge_gems,12
+booster_upgrade_item_gems,5
+iap_gems_s,40 gems / $0.99
+iap_gems_m,220 gems / $4.99
+iap_starter,100 gems + 1000 coins + 60 energy / $1.99 (once)
+
+first_30_min_model (bot acting every 2.2s; no combos/chests/daily),value
+first upgrade affordable,~3 min (luck 120 coins)
+level reached,7 (lv2 0.5m / lv3 1.2m / lv4 2.2m / lv5 3.6m / lv6 5.6m / lv7 8.5m)
+energy spent,184 (40 start + 60 regen + 90 from level-ups) -> never fully blocked for long
+stars earned,22 -> bridge + lanterns + torii
+coins earned (orders only),~465 (+ combos/chests/daily/bell on top)

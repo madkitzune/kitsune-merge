@@ -1,0 +1,37 @@
+/* ===== Pets / album / food ===== */
+.pe{position:relative;display:inline-flex;align-items:center;justify-content:center;line-height:1}
+.pe img{width:1.3em;height:1.3em;object-fit:contain}
+.pe.big{font-size:72px}
+.pe .skin{position:absolute;right:-.15em;top:-.2em;font-size:.5em;font-style:normal;filter:drop-shadow(0 1px 1px #0008)}
+.spirit.pet{pointer-events:auto;cursor:pointer;font-size:32px;z-index:4}
+.spirit.pet.hungry:after{content:'💭';position:absolute;top:-16px;right:-12px;font-size:14px}
+.spirit.pet.tapped,.koi.pet.tapped{animation:petj .45s}@keyframes petj{40%{margin-top:-18px}}
+.koi.pet{pointer-events:auto;cursor:pointer;font-size:20px}
+.foodbar{display:flex;gap:6px;align-items:center;margin-top:8px;overflow-x:auto;padding:2px;touch-action:pan-x}
+.foodbar small{font-size:11px}
+.food{position:relative;flex:0 0 auto;width:46px;height:46px;border-radius:12px;background:var(--panel);display:flex;align-items:center;justify-content:center;font-size:26px;cursor:grab;box-shadow:inset 0 -3px 0 #0003;touch-action:none}
+.food b{position:absolute;right:2px;bottom:0;font-size:11px;color:var(--gold)}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.pcard{background:#0003;border:2px solid var(--rc);border-radius:14px;padding:10px 4px 8px;text-align:center;cursor:pointer;position:relative;box-shadow:inset 0 0 14px color-mix(in srgb,var(--rc) 30%,transparent)}
+.pcard .pi{font-size:40px;line-height:1.1}
+.pcard.locked{opacity:.5;cursor:default;filter:grayscale(.6)}
+.pcard.on:before{content:'★';position:absolute;top:2px;left:6px;color:var(--gold);font-size:14px}
+.pcard.hungry .pi{filter:saturate(.3)}
+.pcard small{font-size:11px;display:block}
+.bar.sat{height:6px;margin:4px 6px 0}.bar.sat i{background:linear-gradient(90deg,#ff8a8a,#8df07a)}
+.reveal{text-align:center;position:relative;padding:10px 0 4px;overflow:hidden}
+.reveal .rays{position:absolute;left:50%;top:60px;width:260px;height:260px;transform:translate(-50%,-50%);background:conic-gradient(from 0deg,transparent 0 10deg,color-mix(in srgb,var(--rc) 50%,transparent) 10deg 20deg,transparent 20deg 40deg,color-mix(in srgb,var(--rc) 50%,transparent) 40deg 50deg,transparent 50deg 70deg,color-mix(in srgb,var(--rc) 50%,transparent) 70deg 80deg,transparent 80deg);
+  border-radius:50%;animation:spin 6s linear infinite;opacity:.7;pointer-events:none}
+@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.reveal .pe.big{position:relative;animation:pop .5s}
+.reveal.small .pe.big{font-size:56px}
+.reveal .rar{display:inline-block;margin:6px 0 2px;padding:2px 10px;border-radius:10px;background:var(--rc);color:#1a1028;font-weight:900;font-size:12px}
+.reveal p{margin:6px 0}
+.foodrow{display:flex;flex-wrap:wrap;gap:6px}
+.fbtn{flex:0 0 auto;width:52px;padding:6px 2px;font-size:22px;display:flex;flex-direction:column;align-items:center;gap:1px}
+.pcard{background:radial-gradient(circle at 50% 30%,color-mix(in srgb,var(--rc) 25%,transparent),#00000040);border-width:3px;box-shadow:0 0 0 1.5px var(--gk),inset 0 1px 0 #fff3,0 3px 0 #0007}
+.pcard .up-n{font-size:13px}
+.food{border:2px solid var(--g2);box-shadow:0 0 0 1.5px var(--gk),0 3px 0 #0007;background:radial-gradient(circle at 40% 30%,#fff3,transparent 55%),linear-gradient(180deg,#5a3a80,#2a1640)}
+.food b{text-shadow:var(--stroke)}
+.reveal .rar{border:2px solid #fff}
+.fbtn b{font-size:10px}.fbtn.on{box-shadow:0 0 0 2px var(--gold)}.fbtn.lock{opacity:.7}

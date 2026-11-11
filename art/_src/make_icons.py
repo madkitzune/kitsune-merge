@@ -1,0 +1,48 @@
+"""UI-іконки замість емодзі: art/ui/<name>.svg (стиль як coin.svg: градієнт, темний контур, відблиск)."""
+import os
+OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "ui")
+SW = 'stroke-width="6" stroke-linejoin="round" stroke-linecap="round"'
+
+def grad(n, a, b):
+    return f'<radialGradient id="g_{n}" cx="0.4" cy="0.3" r="0.85"><stop offset="0" stop-color="{a}"/><stop offset="1" stop-color="{b}"/></radialGradient>'
+
+def svg(n, a, b, body, hl=True):
+    shine = '<ellipse cx="46" cy="38" rx="13" ry="6" transform="rotate(-30 46 38)" fill="#fff" opacity=".5"/>' if hl else ''
+    return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><defs>{grad(n, a, b)}</defs>{body.replace("G", f"url(#g_{n})")}{shine}</svg>'
+
+I = {
+ "star": ("#fff3a0", "#f0a000", f'<path d="M64 10l15 33 36 4-27 24 8 36-32-19-32 19 8-36-27-24 36-4z" fill="G" stroke="#7a4a00" {SW}/>'),
+ "heart": ("#ffb3c6", "#e0284f", f'<path d="M64 112C20 82 10 58 14 40c5-22 34-28 50-6 16-22 45-16 50 6 4 18-6 42-50 72z" fill="G" stroke="#6e0f22" {SW}/>'),
+ "book": ("#ffd9a0", "#c2611c", f'<path d="M14 26c18-6 34-4 50 8 16-12 32-14 50-8v76c-18-6-34-4-50 8-16-12-32-14-50-8z" fill="G" stroke="#5a2a08" {SW}/><path d="M64 34v76" stroke="#5a2a08" {SW}/><path d="M26 44c10-2 20 0 28 4M26 60c10-2 20 0 28 4M74 48c8-4 18-6 28-4M74 64c8-4 18-6 28-4" stroke="#8a4a14" stroke-width="4" fill="none" stroke-linecap="round"/>', False),
+ "scroll": ("#fff1cf", "#d9a75a", f'<rect x="26" y="20" width="76" height="88" rx="8" fill="G" stroke="#5a3408" {SW}/><rect x="16" y="14" width="96" height="16" rx="8" fill="#b5651d" stroke="#5a3408" {SW}/><rect x="16" y="98" width="96" height="16" rx="8" fill="#b5651d" stroke="#5a3408" {SW}/><path d="M42 48h44M42 64h44M42 80h30" stroke="#8a5a20" stroke-width="5" stroke-linecap="round"/>', False),
+ "temple": ("#ff8a6a", "#c0281a", f'<path d="M8 30c20 6 92 6 112 0l-6 14H14z" fill="G" stroke="#5a0e08" {SW}/><rect x="20" y="52" width="88" height="10" rx="3" fill="G" stroke="#5a0e08" {SW}/><path d="M32 44v70M96 44v70" stroke="#5a0e08" stroke-width="20" stroke-linecap="round"/><path d="M32 44v70M96 44v70" stroke="#e0402a" stroke-width="9" stroke-linecap="round"/><path d="M64 44v8" stroke="#5a0e08" {SW}/>', False),
+ "shop": ("#ffcf7a", "#d77a1a", f'<rect x="20" y="56" width="88" height="56" rx="6" fill="#8a4a1a" stroke="#4a2008" {SW}/><rect x="44" y="72" width="40" height="40" rx="4" fill="#ffe1a0" stroke="#4a2008" stroke-width="5"/><path d="M12 56l12-36h80l12 36c0 8-10 12-17 6-6 6-16 6-22 0-6 6-16 6-22 0-6 6-16 6-22 0-7 6-17 2-17-6z" fill="G" stroke="#5a2a08" {SW}/><path d="M38 20l-6 40M64 20v40M90 20l6 40" stroke="#c0281a" stroke-width="7"/>', False),
+ "spark": ("#fff8c0", "#ffb000", f'<path d="M58 8c4 30 14 40 44 46-30 6-40 16-44 46-4-30-14-40-44-46 30-6 40-16 44-46z" fill="G" stroke="#7a4a00" {SW}/><path d="M100 72c2 14 7 19 20 22-13 3-18 8-20 22-2-14-7-19-20-22 13-3 18-8 20-22z" fill="#fff6c0" stroke="#7a4a00" stroke-width="5" stroke-linejoin="round"/>', False),
+ "gear": ("#e8eef8", "#7c8aa6", f'<path d="M56 8h16l3 14 11 5 12-8 11 11-8 12 5 11 14 3v16l-14 3-5 11 8 12-11 11-12-8-11 5-3 14H56l-3-14-11-5-12 8-11-11 8-12-5-11-14-3V56l14-3 5-11-8-12 11-11 12 8 11-5z" fill="G" stroke="#2a3248" {SW}/><circle cx="64" cy="64" r="16" fill="#3a4460" stroke="#2a3248" stroke-width="5"/>', False),
+ "fox": ("#ffb35a", "#e0651a", f'<path d="M20 14l26 30h36l26-30 4 52c0 26-22 48-48 48S16 92 16 66z" fill="G" stroke="#5a2000" {SW}/><path d="M30 70c10 2 20 10 34 34 14-24 24-32 34-34-4 22-16 38-34 38S34 92 30 70z" fill="#fff6ea"/><path d="M28 26l12 14M100 26l-12 14" stroke="#5a2000" stroke-width="5" stroke-linecap="round"/><circle cx="46" cy="64" r="6" fill="#2a1408"/><circle cx="82" cy="64" r="6" fill="#2a1408"/><ellipse cx="64" cy="88" rx="7" ry="5" fill="#2a1408"/>', False),
+ "fish": ("#ffb07a", "#e2452f", f'<path d="M10 64c18-30 54-38 80-18l24-18v72l-24-18c-26 20-62 12-80-18z" fill="G" stroke="#5a1408" {SW}/><circle cx="34" cy="58" r="6" fill="#2a1408"/><path d="M56 42c10 8 10 36 0 44" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" opacity=".7"/>'),
+ "fire": ("#fff2a0", "#ff5a1a", f'<path d="M64 8c6 22 36 36 36 68 0 22-16 40-36 40S28 98 28 76c0-16 10-26 16-30 0 12 6 18 12 18-4-20 2-40 8-56z" fill="G" stroke="#6a1a00" {SW}/><path d="M64 70c10 8 16 16 16 26 0 10-8 16-16 16s-16-6-16-16c0-8 8-16 16-26z" fill="#fff6c0"/>', False),
+ "moon": ("#fff8d0", "#e2b84a", f'<path d="M84 12C52 12 26 38 26 70s26 52 54 52c18 0 32-8 40-20-30 4-58-20-58-50 0-18 8-32 22-40z" fill="G" stroke="#6a4a08" {SW}/>'),
+ "sun": ("#fff7b0", "#ffa000", f'<g stroke="#7a4a00" stroke-width="10" stroke-linecap="round"><path d="M64 6v14M64 108v14M6 64h14M108 64h14M23 23l10 10M95 95l10 10M23 105l10-10M95 33l10-10"/></g><circle cx="64" cy="64" r="32" fill="G" stroke="#7a4a00" {SW}/>'),
+ "lantern": ("#ff9a6a", "#d02a1a", f'<rect x="54" y="8" width="20" height="12" rx="3" fill="#3a2010"/><ellipse cx="64" cy="64" rx="40" ry="46" fill="G" stroke="#5a0e08" {SW}/><path d="M28 50h72M26 66h76M28 82h72" stroke="#8a1a10" stroke-width="4"/><rect x="50" y="108" width="28" height="12" rx="3" fill="#3a2010"/>'),
+ "bell": ("#fff1a0", "#d49a00", f'<path d="M64 14c22 0 34 18 34 40v22l12 18H18l12-18V54c0-22 12-40 34-40z" fill="G" stroke="#6a4400" {SW}/><circle cx="64" cy="106" r="10" fill="#d49a00" stroke="#6a4400" stroke-width="5"/>'),
+ "sound": ("#e8f4ff", "#5a8ad0", f'<path d="M14 48h22l28-24v80L36 80H14z" fill="G" stroke="#1a2a48" {SW}/><path d="M80 46c8 10 8 26 0 36M94 34c14 18 14 42 0 60" stroke="#1a2a48" stroke-width="7" fill="none" stroke-linecap="round"/>', False),
+ "mic": ("#ffd0e0", "#d04a7a", f'<rect x="44" y="10" width="40" height="66" rx="20" fill="G" stroke="#4a0e24" {SW}/><path d="M30 60c0 22 14 34 34 34s34-12 34-34M64 94v22M44 116h40" stroke="#4a0e24" stroke-width="7" fill="none" stroke-linecap="round"/>'),
+ "vibrate": ("#e0f0ff", "#6a8ab8", f'<rect x="38" y="14" width="52" height="100" rx="10" fill="G" stroke="#1a2a48" {SW}/><path d="M22 44v40M106 44v40M10 54v20M118 54v20" stroke="#1a2a48" stroke-width="7" stroke-linecap="round"/>', False),
+ "chart": ("#d8ffd0", "#3aa04a", f'<rect x="16" y="64" width="22" height="46" rx="4" fill="G" stroke="#0e3a14" {SW}/><rect x="53" y="38" width="22" height="72" rx="4" fill="G" stroke="#0e3a14" {SW}/><rect x="90" y="18" width="22" height="92" rx="4" fill="G" stroke="#0e3a14" {SW}/>', False),
+ "tv": ("#e0e8ff", "#5a6ad0", f'<rect x="10" y="28" width="108" height="78" rx="12" fill="G" stroke="#1a1a48" {SW}/><path d="M52 50v34l28-17z" fill="#fff" stroke="#1a1a48" stroke-width="5" stroke-linejoin="round"/><path d="M44 8l20 18 20-18" stroke="#1a1a48" stroke-width="6" fill="none" stroke-linecap="round"/>', False),
+ "check": ("#c8ffb0", "#2fa02a", f'<circle cx="64" cy="64" r="52" fill="G" stroke="#0e3a0a" {SW}/><path d="M38 66l18 18 36-40" stroke="#fff" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'),
+ "help": ("#e0ecff", "#4a7ad0", f'<circle cx="64" cy="64" r="52" fill="G" stroke="#0e1e48" {SW}/><path d="M46 50c0-12 8-20 18-20s18 8 18 18c0 14-18 14-18 28" stroke="#fff" stroke-width="11" fill="none" stroke-linecap="round"/><circle cx="64" cy="96" r="7" fill="#fff"/>'),
+ "flower": ("#ffe0ec", "#f06a9a", f'<g fill="G" stroke="#6a0e34" {SW}><circle cx="64" cy="30" r="22"/><circle cx="98" cy="56" r="22"/><circle cx="84" cy="96" r="22"/><circle cx="44" cy="96" r="22"/><circle cx="30" cy="56" r="22"/></g><circle cx="64" cy="66" r="14" fill="#ffd34a" stroke="#6a0e34" stroke-width="5"/>', False),
+ "leaf": ("#d0ff9a", "#3a9a2a", f'<path d="M20 108C14 58 46 18 112 16c2 62-36 96-92 92z" fill="G" stroke="#0e3a0a" {SW}/><path d="M24 104C50 78 70 58 98 32" stroke="#0e3a0a" stroke-width="5" fill="none" stroke-linecap="round"/>', False),
+ "sleep": ("#e8e0ff", "#7a6ad0", f'<path d="M20 30h34L20 70h34M66 56h26L66 86h26M96 18h18L96 40h18" stroke="#1a1448" stroke-width="16" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 30h34L20 70h34M66 56h26L66 86h26M96 18h18L96 40h18" stroke="G" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>', False),
+ "calendar": ("#fff4e0", "#e0b070", f'<rect x="14" y="22" width="100" height="92" rx="12" fill="G" stroke="#4a2a08" {SW}/><rect x="14" y="22" width="100" height="26" rx="12" fill="#e2452f" stroke="#4a2a08" {SW}/><path d="M40 12v20M88 12v20" stroke="#4a2a08" stroke-width="8" stroke-linecap="round"/><path d="M36 70h12M58 70h12M80 70h12M36 92h12M58 92h12" stroke="#8a5a20" stroke-width="8" stroke-linecap="round"/>', False),
+ "bow": ("#ffc0d8", "#e0407a", f'<path d="M64 64C40 30 12 34 14 64s26 34 50 0zM64 64c24-34 52-30 50 0s-26 34-50 0z" fill="G" stroke="#5a0e2a" {SW}/><path d="M56 72l-14 44M72 72l14 44" stroke="#5a0e2a" stroke-width="10" stroke-linecap="round"/><circle cx="64" cy="64" r="12" fill="#e0407a" stroke="#5a0e2a" stroke-width="5"/>', False),
+ "lock": ("#fff1a0", "#c08a00", f'<path d="M40 56V40a24 24 0 0 1 48 0v16" stroke="#4a3000" stroke-width="12" fill="none"/><rect x="24" y="56" width="80" height="60" rx="12" fill="G" stroke="#4a3000" {SW}/><circle cx="64" cy="82" r="8" fill="#4a3000"/><path d="M64 86v14" stroke="#4a3000" stroke-width="6"/>'),
+ "back": ("#ffffff", "#e0e0f0", f'<path d="M80 18L34 64l46 46" stroke="#2a1640" stroke-width="22" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M80 18L34 64l46 46" stroke="G" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>', False),
+}
+
+os.makedirs(OUT, exist_ok=True)
+for n, (a, b, body, *hl) in I.items():
+    open(os.path.join(OUT, n + ".svg"), "w", encoding="utf8").write(svg(n, a, b, body, hl[0] if hl else True))
+print(len(I), "icons")

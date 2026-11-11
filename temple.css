@@ -1,0 +1,73 @@
+/* ===== Temple: living scene ===== */
+#temple{position:fixed;inset:0;z-index:18;display:none;flex-direction:column;max-width:480px;margin:0 auto;background:var(--bg2);padding:calc(6px + var(--sat)) 10px calc(8px + var(--sab))}
+#temple.on{display:flex;animation:fadein .3s}@keyframes fadein{from{opacity:0;transform:scale(1.03)}}
+.thead{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.thead .tt{font-family:var(--fd);font-weight:700;font-size:20px}
+.thud{margin-left:auto;background:var(--panel);border-radius:10px;padding:5px 9px;font-weight:800;font-size:13px;white-space:nowrap}
+.tscene{position:relative;flex:1;min-height:0;border-radius:16px;overflow:hidden;box-shadow:inset 0 0 40px #000a,0 0 0 2px #fff1;touch-action:manipulation}
+.tscene.night:after{content:'';position:absolute;inset:0;background:#0a0830;opacity:.35;pointer-events:none}
+.tscene.dusk:after{content:'';position:absolute;inset:0;background:#ff5a2a;opacity:.12;pointer-events:none;mix-blend-mode:multiply}
+.tscene .path{position:absolute;left:50%;bottom:0;width:26%;height:60%;transform:translateX(-50%) perspective(200px) rotateX(40deg);transform-origin:bottom;
+  background:linear-gradient(180deg,#0000,#d8c7a855 30%,#d8c7a888);border-radius:40% 40% 0 0;pointer-events:none}
+.sky-o{position:absolute;right:7%;top:4%;font-size:40px;filter:drop-shadow(0 0 16px #fff8);animation:float 6s ease-in-out infinite}
+.star{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;animation:twinkle 2s infinite alternate;box-shadow:0 0 4px #fff}
+@keyframes twinkle{to{opacity:.2}}
+.obj{position:absolute;transform:translate(-50%,-50%);cursor:pointer;line-height:1;filter:drop-shadow(0 6px 6px #0008);transition:filter .5s,opacity .5s;z-index:2}
+.obj.off{filter:grayscale(1) brightness(.3) drop-shadow(0 0 0 #0000);opacity:.55}
+.obj.next{filter:grayscale(.7) brightness(.6);animation:nextp 1.1s infinite alternate}
+@keyframes nextp{to{filter:grayscale(.3) brightness(.9) drop-shadow(0 0 10px var(--gold))}}
+.obj.on{filter:drop-shadow(0 0 8px color-mix(in srgb,var(--gold) 70%,transparent)) drop-shadow(0 6px 6px #0008)}
+.obj.built{animation:built 1s cubic-bezier(.2,1.5,.4,1)}@keyframes built{0%{transform:translate(-50%,-30%) scale(.1);opacity:0}60%{transform:translate(-50%,-55%) scale(1.3);opacity:1}}
+.obj.tapped{animation:tapj .35s}@keyframes tapj{40%{transform:translate(-50%,-62%) scale(1.15) rotate(-6deg)}}
+.obj[data-o="bell"].tapped{animation:swing .9s;transform-origin:50% 0}@keyframes swing{20%{transform:translate(-50%,-50%) rotate(18deg)}40%{transform:translate(-50%,-50%) rotate(-14deg)}60%{transform:translate(-50%,-50%) rotate(8deg)}80%{transform:translate(-50%,-50%) rotate(-4deg)}}
+.obj[data-o="tree"].tapped{animation:treesh .6s}@keyframes treesh{20%,60%{transform:translate(-52%,-50%) rotate(-3deg)}40%,80%{transform:translate(-48%,-50%) rotate(3deg)}}
+.obj .lock{position:absolute;left:50%;bottom:-14px;transform:translateX(-50%);font-size:11px;font-weight:900;background:#000b;color:var(--gold);border-radius:8px;padding:1px 6px;white-space:nowrap;filter:none}
+.obj .cd{position:absolute;right:-12px;top:-8px;font-size:10px;font-weight:900;background:#000b;color:#fff;border-radius:8px;padding:1px 5px;filter:none}
+.obj .cd.rdy{background:#ff4d6d;animation:pulse .6s infinite alternate}
+.lamp{filter:brightness(.55) drop-shadow(0 4px 4px #0008)}
+.lamp.lit{filter:brightness(1.25) drop-shadow(0 0 12px #ffb347) drop-shadow(0 0 22px #ff8a00)}
+.granny{font-size:64px;z-index:4}.granny img{height:120px;width:auto;transform:translateY(-20%)}
+.say{position:absolute;left:24%;right:4%;bottom:6%;background:linear-gradient(180deg,#fffaf0,#f4e6cf);color:#3a2418;border:3px solid var(--gold);border-radius:16px;padding:9px 12px;font-weight:800;font-size:14px;
+  box-shadow:0 8px 20px #0009;opacity:0;transform:translateY(10px);transition:all .25s;pointer-events:none;z-index:6}
+.say.on{opacity:1;transform:none}
+.say:before{content:'';position:absolute;left:-13px;bottom:14px;border:8px solid transparent;border-right:13px solid var(--gold);border-left:0}
+.spirit{position:absolute;transform:translate(-50%,-50%);font-size:26px;transition:left 1s linear,top 1s linear;pointer-events:none;z-index:3;animation:bob .5s infinite alternate}
+.spirit.flip{transform:translate(-50%,-50%) scaleX(-1)}@keyframes bob{to{margin-top:-4px}}
+.drop{position:absolute;transform:translate(-50%,-50%);font-size:26px;cursor:pointer;z-index:5;animation:dropin .5s cubic-bezier(.2,1.6,.4,1),glint 1s .5s infinite alternate;filter:drop-shadow(0 0 8px #ffd166)}
+@keyframes dropin{from{transform:translate(-50%,-150%) scale(.3)}}@keyframes glint{to{filter:drop-shadow(0 0 14px #fff)}}
+.koi{position:absolute;transform:translate(-50%,-50%);font-size:18px;pointer-events:none;z-index:3;animation:swim 3s infinite ease-in-out}
+@keyframes swim{50%{margin-left:14px}}
+.koi.jump{animation:kjump .8s}@keyframes kjump{40%{transform:translate(-50%,-260%) rotate(-40deg)}}
+.wave{position:fixed;width:20px;height:20px;border-radius:50%;border:3px solid var(--gold);transform:translate(-50%,-50%);pointer-events:none;z-index:30;animation:wave 1.1s ease-out forwards}
+.wave.water{border-color:#9fe8ff}
+@keyframes wave{to{width:260px;height:260px;opacity:0;border-width:1px}}
+.leaf{position:fixed;font-size:20px;pointer-events:none;z-index:30;animation:leaf 1.6s ease-in forwards}
+@keyframes leaf{to{transform:translate(calc(40px - 80px*var(--r,.5)),160px) rotate(260deg);opacity:0}}
+.blessaura{position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 60px #ff7a2f88;animation:pulse 1.2s infinite alternate;z-index:1}
+#tpanel{margin-top:8px}
+
+/* ===== RESTYLE 1.0: temple as a city map ===== */
+.thead .tt{color:#fff;text-shadow:var(--stroke);font-size:22px}
+.thud{background:linear-gradient(180deg,#2a1640,#120a1e);border:2px solid var(--g2);border-radius:14px;box-shadow:0 2px 0 var(--gk);text-shadow:var(--stroke)}
+.tscene{border:3px solid var(--g2);box-shadow:0 0 0 2px var(--gk),inset 0 0 40px #000a,0 6px 14px #0008}
+#temple.on .tscene{animation:rise .4s ease-out}
+.obj.on:after,.obj.next:after{position:absolute;left:50%;top:100%;transform:translateX(-50%);margin-top:2px;padding:2px 14px 4px;white-space:nowrap;
+  font:900 10px/1.1 Nunito,system-ui,sans-serif;color:#fff;text-shadow:var(--stroke);background:url("art/ui/frames/ribbon.svg") center/100% 100% no-repeat;pointer-events:none}
+.obj.next:after{filter:grayscale(.5)}
+.obj[data-lbl]:after{content:attr(data-lbl)}
+.obj.off:after,.lamp:after{content:none!important}
+.obj .lock{top:100%;bottom:auto;margin-top:20px;border:1.5px solid var(--g2)}
+.obj .cd{background:linear-gradient(180deg,#2a1640,#120a1e);border:1.5px solid var(--g2)}
+.obj .cd.rdy{background:radial-gradient(circle at 40% 35%,#ff9a9a,#e31b2f 60%);border:1.5px solid #fff}
+.build{border:3px solid var(--g2);box-shadow:0 0 0 2px var(--gk),0 3px 0 #0007;background:radial-gradient(120% 80% at 50% 0%,#fff8e6,#f3e0b4 55%,#e2c48a);color:#4a2a10}
+.build .up-n{color:#4a2a10;text-shadow:none}.build small{color:#6a4418}
+
+/* SVG-постройки: руина видна сама по себе, без сірого силуету */
+.obj .tart{display:block;height:auto;pointer-events:none;
+  -webkit-mask-image:radial-gradient(ellipse 72% 62% at 50% 34%,#000 78%,transparent 100%);mask-image:radial-gradient(ellipse 72% 62% at 50% 34%,#000 78%,transparent 100%)}
+.obj.art{translate:0 18%}.obj.art .shd{display:none}.obj.art.off{filter:brightness(.75) drop-shadow(0 4px 4px #0008);opacity:.9}
+.obj.art.next{filter:drop-shadow(0 0 6px var(--gold)) drop-shadow(0 4px 4px #0008)}
+@media (max-height:700px){.build{padding:6px 8px}.build .big{font-size:28px}}
+
+/* 375x667: запас 2px, щоб нижня панель не вилазила */
+@media (max-height:700px){#tpanel{margin-top:6px}#temple{padding-bottom:calc(6px + var(--sab))}}
