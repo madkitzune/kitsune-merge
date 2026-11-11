@@ -248,8 +248,6 @@ const subHtml = () => {
     const tabs = document.querySelector('#mc .tabs'); if (!tabs) return;
     const freeToday = M().adPouch === today();
     tabs.insertAdjacentHTML('afterend', piggyHtml() + subHtml() + `
-      <div class="up mon-card"><div class="big">🧩</div><div class="up-b" style="flex:1"><div class="up-n">${T('Мішечок осколків')}</div><small>${T('{n} випадкових осколків', { n: FRAG.packSize })}</small></div>
-        <button class="price${S.ge >= FRAG.packGems ? ' ok' : ''}" onclick="buyFragPack()">${FRAG.packGems}<br>${U('gem')}</button></div>
       <div class="up mon-card"><div class="big">📺</div><div class="up-b" style="flex:1"><div class="up-n">${T('Мішечок осколків')} · ${T('Безкоштовно за рекламу')}</div>
         <small>${freeToday ? T('Сьогодні вже взято') : T('{n} випадкових осколків', { n: 3 })}</small></div>
         <button class="price${freeToday ? '' : ' ok'}" ${freeToday ? 'disabled' : ''} onclick="adPouch()">▶</button></div>`);

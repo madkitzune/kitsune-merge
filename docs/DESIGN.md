@@ -97,12 +97,12 @@ Foxes and koi no longer appear all at once from a quest. Each one is assembled f
 
 | Rarity | Shards to unlock | Roll weight |
 |---|---:|---:|
-| Common | 10 | 6 |
-| Rare | 20 | 3 |
-| Epic | 35 | 1.5 |
-| Legendary | 50 | 0.6 |
+| Common | 6 | 6 |
+| Rare | 12 | 3 |
+| Epic | 20 | 1.5 |
+| Legendary | 30 | 0.6 |
 
-- **Sources.** 35% chance of 1 shard per order, 2–3 shards per chest. A story-quest step gives 60% of that pet's shards, and the rest comes from play. Shards also come from the pass, offers, a shop pouch (15 gems for 6) and one free pouch per day for a rewarded ad.
+- **Sources.** 35% chance of 1 shard per order, 2–3 shards per chest. A story-quest step gives 60% of that pet's shards, and the rest comes from play. Shards also come from the pass, offers and one free pouch per day for a rewarded ad. Pets cannot be bought with gems: every pet is assembled only from its own shards, so the collection is earned, never skipped.
 - **Duplicates are never wasted.** A shard of a pet you already own turns into friendship (+15), which levels up its passive.
 - **Album.** A locked pet shows as a silhouette with a shard bar, and its name appears after the first shard. This is the "almost there" pull that card collections use, without needing a server for trading.
 
