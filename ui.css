@@ -104,3 +104,17 @@ body:has(.modal.on) .focus{z-index:auto!important;box-shadow:none!important;anim
   .card{box-shadow:0 0 0 2px var(--wood-d),inset 0 0 0 2px var(--wood-l),0 10px 20px #0008}
   .nav{box-shadow:inset 0 2px 0 #ffffff33,0 3px 0 var(--wood-d)}
 }
+
+/* ===== Хоші: портрет стоїть НАД бульбашкою, текст ніколи її не закриває (1.7.4) ===== */
+#tut .box{height:auto;display:flex;flex-direction:column;align-items:flex-start;padding:0 8px 8px}
+#tut .por{position:relative;left:auto;bottom:auto;width:118px;height:150px;margin:0 0 -18px 4px;z-index:2;flex:none}
+#tut .bub{position:relative;left:auto;right:auto;bottom:auto;align-self:stretch;padding:22px 12px 10px 14px;z-index:1;
+  background:var(--paper);color:var(--ink);border:3px solid var(--wood);box-shadow:0 2px 0 var(--wood-d),0 8px 20px #0008}
+#tut .bub:before{left:44px;top:-14px;bottom:auto;border:9px solid transparent;border-bottom:14px solid var(--wood);border-top:0}
+#tut .nm{left:auto;right:12px;top:-13px}
+#tut .tx{min-height:0;font-size:clamp(14px,3.9vw,16px)}
+#tut .bub:after{content:'';display:block;clear:both}
+@media (max-height:640px){#tut .por{width:92px;height:118px;margin-bottom:-14px}}
+/* під час головного навчання — лише поле та підсвічене; вийти з поля не можна */
+body.tutoring .nav .nb:not(.focus),body.tutoring .top .icon,body.tutoring .top .res,body.tutoring .ava,
+body.tutoring #chipTemple,body.tutoring .lvl .icon{pointer-events:none;filter:grayscale(.6) brightness(.85)}

@@ -95,8 +95,8 @@
 .koi2 .kb{font-size:34px;line-height:1;filter:drop-shadow(0 6px 4px #0006);will-change:transform}
 .koi2 .kb .pe img{width:56px;height:auto}
 .koi2.tapped .kb{animation:none}
-.bub{position:absolute;transform:translate(-50%,-50%);z-index:6;font-size:26px;cursor:pointer;animation:bubin .6s cubic-bezier(.2,1.6,.4,1),bubf 2.4s .6s ease-in-out infinite alternate;filter:drop-shadow(0 0 8px #bff4ff)}
-.bub .pearl{display:block;width:26px;height:26px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#e8f2ff 40%,#b9c8e8 75%,#8a9ac0);box-shadow:0 0 10px #fff}
+.pscene .bub{position:absolute;transform:translate(-50%,-50%);z-index:6;font-size:26px;cursor:pointer;animation:bubin .6s cubic-bezier(.2,1.6,.4,1),bubf 2.4s .6s ease-in-out infinite alternate;filter:drop-shadow(0 0 8px #bff4ff)}
+.pscene .bub .pearl{display:block;width:26px;height:26px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#e8f2ff 40%,#b9c8e8 75%,#8a9ac0);box-shadow:0 0 10px #fff}
 @keyframes bubin{from{transform:translate(-50%,0) scale(.2);opacity:0}}
 @keyframes bubf{to{margin-top:-6px}}
 .pellet{position:absolute;transform:translate(-50%,-50%);z-index:4;font-size:20px;pointer-events:none;animation:sink 1.2s ease-out forwards}

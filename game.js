@@ -334,7 +334,8 @@ function setTalk(on){const por=$('tPor');clearInterval(talkT);por.classList.togg
   if(HOSHI.base){const im=por.querySelector('img');if(!im)return;im.src=HOSHI.base;
     if(on&&HOSHI.talk&&HOSHI.talk.slice(-4)===HOSHI.base.slice(-4)){let f=0;talkT=setInterval(()=>{f^=1;im.src=f?HOSHI.talk:HOSHI.base},166)}}}
 function nextLine(){document.querySelectorAll('.focus').forEach(e=>e.classList.remove('focus'));clearInterval(typer);
-  tcur=tq.shift();if(!tcur){$('tut').classList.remove('on');setTalk(false);if(tq.done)tq.done();return}
+  tcur=tq.shift();document.body.classList.toggle('tutoring',!!tcur&&TUTORIAL.includes(tcur));
+  if(!tcur){$('tut').classList.remove('on');setTalk(false);if(tq.done)tq.done();return}
   const wasOn=$('tut').classList.contains('on');$('tut').classList.add('on');
   if(!wasOn)$('tPor').innerHTML=HOSHI.base?`<img src="${HOSHI.base}" alt="">`:NARR.por;$('tNm').textContent=T(NARR.name);
   const ti=TUTORIAL.indexOf(tcur);if(ti>=0)track('tutorial_step_'+(ti+1),{});
