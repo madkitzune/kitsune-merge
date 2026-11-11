@@ -18,8 +18,8 @@ JOBS = [
   ("ev/lantern.png", "glowing red japanese paper lantern, cute game item" + SPR, 512, 512, "sprite", 521),
   ("ev/lantern_gold.png", "glowing golden japanese paper lantern with sparkles, cute game item" + SPR, 512, 512, "sprite", 522),
   ("ev/thorn.png", "spiky brown chestnut burr with angry little eyes, cute game hazard item" + SPR, 512, 512, "sprite", 523),
-  ("ev/basket.png", "woven bamboo basket, front view, cute game item" + SPR, 512, 512, "sprite", 524),
-  ("ev/card_back.png", "ornate japanese playing card back, red lacquer with golden koi and wave pattern, rectangular card, front view" + SPR, 512, 704, "sprite", 525),
+  ("ev/basket.png", "empty round woven bamboo basket with two small handles, nothing inside, no plants, no leaves, front view, cute game item" + SPR, 512, 512, "sprite", 624),
+  ("ev/card_back.png", "minimal elegant card back, soft muted teal paper texture, thin cream border, small simple koi silhouette emblem in the center, subtle wave lines, calm low contrast, no text, no letters, rectangular card, front view" + SPR, 512, 704, "sprite", 625),
 ]
 
 def main():

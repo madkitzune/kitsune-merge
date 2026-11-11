@@ -1,5 +1,5 @@
 // Offline cache: core files precached, everything else (art/, voice/) cached on first use.
-const V='kitsune-v2.0.2';
+const V='kitsune-v2.0.3';
 const CORE=['./','index.html','style.css','temple.css','pets.css','scenes.css','ui.css','pets.js','scenes.js','game.js','icons.js','feel.js','profile.js','frags.js','monet.js','events.js','i18n.js','manifest.json','icons/icon-192.png','icons/icon-512.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==V).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
