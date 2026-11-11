@@ -164,7 +164,7 @@ function loadCommon(){const ps=[...petsPreload()];for(const k in UI)ps.push(prob
 let GENOK=false;const TART={};
 const tImg=(b,on)=>TART[b.id]?`<img class="tart" src="${on?TART[b.id].on:TART[b.id].ruin}" alt="" style="width:${Math.round(b.s*1.7)}px">`:b.ic;
 const icon=t=>t===CHEST?U('chest'):t===GEN?(GENOK?`<img class="art" src="${GENOK}" draggable="false" alt="">`:TH().hero):(ART[S.set.theme]&&ART[S.set.theme][t]?`<img class="art" src="${ART[S.set.theme][t]}" draggable="false" alt="">`:TH().items[t-1]);
-const enMax=()=>CFG.energyMax+CFG.upgrades.cap.val(S.up.cap)+PB('fox_sleepy')*CFG.pets.fx.fox_sleepy;
+const enMax=()=>CFG.energyMax+CFG.upgrades.cap.val(S.up.cap)+PB('fox_sleepy')*CFG.pets.fx.fox_sleepy+(window.MON_CAP?MON_CAP():0);
 const blessOn=()=>S.bless&&S.bless.until>now();
 function applyBg(){const th=S.set.theme;document.body.classList.toggle('hasbg',!!BGOK[th]);if(BGOK[th])document.body.style.setProperty('--bgimg',`url("${BGOK[th]}")`)}
 function applyTheme(){loadArt(S.set.theme);const c=TH().c;for(const k in c)document.documentElement.style.setProperty('--'+k,c[k]);

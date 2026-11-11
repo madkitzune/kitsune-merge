@@ -92,11 +92,31 @@ Temple costs (v1.6.1, after a playtest note that buildings came too fast): stars
 - Chapter 1 drops to about 2k energy. At about 300 energy per day for a typical 3–4 sessions (regen between sessions, level-ups, the daily gift and some ads), that is **about 6–7 days**. This matches the chapter length I would aim for in a casual merge game: the first goal is reachable inside the D7 window.
 - **Applied in v1.6** (`CFG.orderMaxTier`, `CFG.orderStars`). In a live test the v1.0 values would be kept as the control arm of A/B #1 (§6), to confirm with players what the model predicts.
 
-### Monetisation placement
-- **Rewarded ad.** Shown only where the player wants more energy (the energy-empty screen and the shop) and capped at 5 per day. No interstitials in the prototype: for cozy merge they hurt D1 more than they earn early.
-- **Starter pack ($1.99, once).** In the shop, highlighted after the first time the player runs out of energy. That is the moment the player understands what energy is worth.
-- **Gem packs ($0.99 / $4.99).** The value pack is marked "best value", a classic anchor.
-- **Gem sinks.** Energy refill (8 gems), boosters (5–12), skins (30). Every sink saves time or is cosmetic. None of them is required to progress.
+### Pets from shards (v1.9)
+Foxes and koi no longer appear all at once from a quest. Each one is assembled from **shards**, so a collection grows a little in almost every session.
+
+| Rarity | Shards to unlock | Roll weight |
+|---|---:|---:|
+| Common | 10 | 6 |
+| Rare | 20 | 3 |
+| Epic | 35 | 1.5 |
+| Legendary | 50 | 0.6 |
+
+- **Sources.** 35% chance of 1 shard per order, 2–3 shards per chest. A story-quest step gives 60% of that pet's shards, and the rest comes from play. Shards also come from the pass, offers, a shop pouch (15 gems for 6) and one free pouch per day for a rewarded ad.
+- **Duplicates are never wasted.** A shard of a pet you already own turns into friendship (+15), which levels up its passive.
+- **Album.** A locked pet shows as a silhouette with a shard bar, and its name appears after the first shard. This is the "almost there" pull that card collections use, without needing a server for trading.
+
+### Monetisation systems (v1.9, demo payments)
+| System | Rules | Why it is there |
+|---|---|---|
+| **Season pass "Temple Path"** | 14-day season, 30 tiers × 100 points. Points: order 10, quest 30, daily gift 20, building 60. Free track: coins, energy, food, shards, gems. Premium ($4.99): gems, shards, a skin every 10 tiers | Steady revenue that rewards the play the player already does. Main payer conversion beyond the first purchase |
+| **Piggy bank** | +2 gems per order, +1 per 5 merges, cap 150. Can be broken from 50 gems for $1.99 | Cheapest first purchase. The player can see what they have "earned", which turns non-payers into payers |
+| **Triggered offers** | One at a time, with a timer. Energy-empty → 120⚡ + 15💎 ($0.99, 30 min). Stars ready but coins short → builder pack ($1.99, 60 min). Every 3rd level → level gift ($2.99, 45 min). Each trigger fires once (per day / per building / per level) | Sells at the moment of need. The highest-converting tool in F2P, and easy to A/B |
+| **Subscription "Hoshi's Blessing"** | $4.99 / week: 10💎 + 20⚡ daily, +10 max energy, ads without waiting | Recurring revenue for engaged players |
+| **Rewarded ads** (cap 8/day) | ×2 coins for an order (button for 5 s), ×2 daily gift, free shard pouch daily, energy | Opt-in value for non-payers. No interstitials |
+| Starter pack, gem packs, gem sinks | As before: $1.99 once / $0.99 / $4.99; refill, boosters, skins | Baseline store |
+
+Guardrails I would watch: D1/D7 retention (offers must not feel pushy, hence one at a time and a fixed set of moments), the share of payers whose first purchase is the piggy bank, and ad views per DAU against session length.
 
 ---
 
@@ -119,7 +139,8 @@ Temple costs (v1.6.1, after a playtest note that buildings came too fast): stars
 - **Funnel:** `splash_play → tutorial_start → tutorial_step_N → tutorial_done → first_order → temple_build_1 → first_upgrade`
 - **Core:** `merge{tier}`, `order_done{coins,stars}`, `level_up{lv}`, `energy_empty`, `hint_shown`
 - **Meta:** `temple_open`, `temple_build_N`, `temple_tap`, `temple_reward`, `meadow_open`, `pond_open`, `pet_unlock`, `pet_feed`, `decor_buy`
-- **Monetisation:** `ad_rewarded`, `iap_demo{id}`, `booster{k}`, `upgrade{k,lv,cost}`
+- **Monetisation:** `ad_rewarded{id}`, `iap_demo{id}`, `offer_shown{id}`, `offer_buy{id}`, `piggy_break{g}`, `pass_tier{n}`, `pass_claim`, `pass_premium`, `sub_start`, `sub_daily`, `frag_pack`, `booster{k}`, `upgrade{k,lv,cost}`
+- **Collection:** `frags{n,src}`, `pet_unlock{id,src}`
 - **Retention:** `session_start` / `session_end` (playtime), `daily_claim{day}`, D1/D7 return computed from the active days
 
 ### KPI targets for a soft-launch test (casual merge benchmarks)
@@ -148,6 +169,9 @@ Temple costs (v1.6.1, after a playtest note that buildings came too fast): stars
 | 1 | Order tiers outgrow the star income, so the temple stalls after level 10 and players churn | Tier cap 6, stars = ⌈tier/2⌉ (§3) | D7 retention, `temple_build_N` reach by D3 | Coins/DAU (soft-currency inflation), IAP conversion | Ship B if D7 rises with p < 0.05 and IAP conversion does not drop by more than 10% relative |
 | 2 | Showing the starter pack right after the first `energy_empty` converts better than only listing it in the shop | Pop-up offer on the first `energy_empty`, once | IAP conversion D3 | D1 retention (the pop-up must not hurt it) | Ship if conversion rises and D1 drops by less than 1 pp |
 | 3 | Voiced narrative lifts early retention in a cozy merge game | A: voice on, B: text only | Tutorial completion, D1 | Session length | If the difference is under 1 pp, voice is not worth producing for future chapters |
+| 4 | A triggered offer at the moment of need converts better than the same pack in the shop | Builder pack shown when stars are ready but coins are short | Payer conversion D7 | D1/D7 retention, sessions/DAU | Ship if conversion rises by 15% relative or more and retention drops by under 0.5 pp |
+| 5 | The piggy bank is a cheaper first purchase than the starter pack | A: starter pack only, B: + piggy bank | Share of DAU who make a first purchase within D7 | ARPPU (the cheap item must not cannibalise bigger ones) | Ship if first purchases rise and ARPDAU does not fall |
+| 6 | Shards keep the pet loop alive longer than whole-pet quest rewards | A: v1.8 (whole pets), B: shards | D3/D7 retention, `pet_feed`/DAU | Time to first pet (must stay under one session) | Ship if D7 rises and the first pet still arrives in session 1 |
 
 Sample size: to detect +2 pp on D1 from a 35% baseline (α = 0.05, power 0.8) needs about 9k installs per arm. That is why test 1, the change with the biggest expected effect, goes first.
 

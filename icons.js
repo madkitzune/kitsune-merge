@@ -3,7 +3,7 @@
 const MAP={'⭐':'star','🌟':'star','💖':'heart','❤️':'heart','📖':'book','📜':'scroll','⛩️':'temple','⛩':'temple','🏯':'temple','🛒':'shop',
   '✨':'spark','⚙️':'gear','⚙':'gear','🦊':'fox','🐟':'fish','🐠':'fish','🐡':'fish','🔥':'fire','🌙':'moon','☀️':'sun','🏮':'lantern','🔔':'bell',
   '🔊':'sound','🎙️':'mic','📳':'vibrate','📊':'chart','📺':'tv','✓':'check','✅':'check','❔':'help','🌸':'flower','🍃':'leaf','🍂':'leaf','🍀':'leaf',
-  '💤':'sleep','🗓':'calendar','🗓️':'calendar','🎀':'bow','◀':'back','🔒':'lock','💰':'coin','💎':'gem','⚡':'energy','🎁':'chest'};
+  '💤':'sleep','🗓':'calendar','🗓️':'calendar','🎀':'bow','🎫':'ticket','🐷':'piggy','🧩':'shard','◀':'back','🔒':'lock','💰':'coin','💎':'gem','⚡':'energy','🎁':'chest'};
 const keys=Object.keys(MAP).sort((a,b)=>b.length-a.length);
 const RE=new RegExp(keys.map(k=>k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|'),'g');
 const SKIP={SCRIPT:1,STYLE:1,TEXTAREA:1,INPUT:1,PRE:1};
