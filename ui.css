@@ -38,7 +38,7 @@ button.main,.price.ok,.tbuild.ok b{background:var(--cin);color:#fff;border-color
 .chip.ready{box-shadow:0 2px 0 var(--wood-d),0 0 0 3px var(--gold-s)}
 
 /* ---------- orders: paper notes pinned with a red pin ---------- */
-.order{background:var(--paper) var(--paper-tex);border:2px solid var(--wood-l);box-shadow:var(--sh);color:var(--ink)}
+.order{background-color:var(--paper);background-image:var(--paper-tex);border:2px solid var(--wood-l);box-shadow:var(--sh);color:var(--ink)}
 .order .rw{background:var(--paper2);color:var(--ink);border:1.5px solid var(--line)}
 .order.ready{border-color:var(--leaf);box-shadow:0 0 0 3px #5c9a3a55,var(--sh);animation:none}
 
@@ -50,7 +50,7 @@ button.main,.price.ok,.tbuild.ok b{background:var(--cin);color:#fff;border-color
 
 /* ---------- modal: paper sheet in a wooden frame ---------- */
 .modal{background:#1a0f0899}
-.card{background:var(--paper) var(--paper-tex);color:var(--ink);border:5px solid var(--wood);
+.card{background-color:var(--paper);background-image:var(--paper-tex);color:var(--ink);border:5px solid var(--wood);
   box-shadow:0 0 0 2px var(--wood-d),inset 0 0 0 2px var(--wood-l),0 18px 40px #000a}
 .card h3{color:var(--ink);text-shadow:none}
 .card small,.card .up-fx,.card .loot,.mh-s{color:var(--ink2);text-shadow:none}
@@ -84,3 +84,9 @@ button.main,.price.ok,.tbuild.ok b{background:var(--cin);color:#fff;border-color
 #tut .nm{background:var(--wood)}
 #toast{background:var(--paper)!important;color:var(--ink)!important;border:2px solid var(--wood-d);text-shadow:none!important}
 #splash button{background:var(--cin);color:#fff;border-color:var(--cin-d);box-shadow:0 4px 0 var(--cin-d)}
+
+/* вікно поверх навчання: навчання ховається, поки відкрите вікно; підсвітка не пробиває вікно */
+body:has(.modal.on) #tut{display:none!important}
+body:has(.modal.on) .focus{z-index:auto!important;box-shadow:none!important;animation:none}
+/* невисокі екрани (ландшафт, великий масштаб браузера) */
+@media (max-height:560px){.card .mbody{padding:14px 12px 12px}.mh{min-height:34px;margin-bottom:22px}.mh-t{font-size:15px}.modal{padding:8px 0}}
