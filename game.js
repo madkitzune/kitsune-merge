@@ -306,7 +306,7 @@ function fitBoard(){const w=$('boardWrap');if(!w)return;const s=Math.min(w.clien
   document.documentElement.style.setProperty('--cs',((s-10)/6)+'px')}
 addEventListener('resize',()=>{fitBoard();if(templeOpen)renderTemple();if(typeof meadowOpen!=='undefined'&&meadowOpen)renderMeadow();if(typeof pondOpen!=='undefined'&&pondOpen)renderPond()});
 function render(popIdx,popCls='pop'){regen();
-  {const av=document.querySelector('.ava-img span');if(av&&HOSHI.base&&av.dataset.src!==HOSHI.base){av.dataset.src=HOSHI.base;av.innerHTML=`<img src="${HOSHI.base}" alt="" style="width:100%;height:100%;object-fit:cover;object-position:50% 12%;border-radius:50%">`}}
+  {const av=document.querySelector('.ava-img span');if(av&&HOSHI.base&&!av.dataset.src){av.dataset.src=HOSHI.base;av.innerHTML=`<img src="${HOSHI.base}" alt="" style="width:100%;height:100%;object-fit:cover;object-position:50% 12%;border-radius:50%">`}}
   $('en').textContent=S.en+'/'+enMax();$('co').textContent=S.co;$('ge').textContent=S.ge;$('lv').textContent=S.lv;
   const need=CFG.xpToLevel(S.lv);$('xp').style.width=(S.xp/need*100)+'%';$('xptxt').textContent=S.xp+'/'+need;
   $('icEn').innerHTML=U('energy');$('icCo').innerHTML=U('coin');$('icGe').innerHTML=U('gem');
