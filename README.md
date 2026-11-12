@@ -25,7 +25,7 @@ All balance values live in one `CFG` object, mirrored in `balance.csv`.
 I worked as **producer and game director**. Claude Code was the **builder and design co-author**. Full breakdown: [docs/DESIGN.md §7](docs/DESIGN.md#7-how-it-was-built-with-ai).
 - **Me:** goal, genre and format; feature direction (themes, Grandma Hoshi's story, the temple, pets with food and quests, a separate home for foxes, festivals with mini-games in other genres); choosing between proposed options; playtesting on PC and phone; finding the problems and sending changes back; voice casting.
 - **AI:** all code; concrete numbers and formulas; the economy simulation; metrics, KPI thresholds and A/B hypotheses; art prompts, generation and clean-up; script lines, translations, icons.
-- **Time:** fill in. Flow: goal → AI proposes options → I pick → AI builds → I play it → I write down what feels wrong → repeat.
+- **Time:** about 5–6 hours of my own hands-on time (direction, choices, playtests, feedback); the AI built in between. Flow: goal → AI proposes options → I pick → AI builds → I play it → I write down what feels wrong → repeat.
 
 ## v2 (after playtest feedback: "want to choose theme, more interaction")
 - 4 themes (palette + item set + hero): Fox Shrine, Sakura, Deep Sea, Night Forest; `theme` event tracked.

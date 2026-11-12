@@ -210,6 +210,8 @@ This is the honest split. I worked as **producer and game director**: I set the 
 | Voice | Chose a grandmother voice over a male one, picked the variant | Script, voice design and TTS (ElevenLabs v3) |
 | Tooling | Found the gamedev skills pack and API keys | Reviewed the skills and installed the useful ones |
 
+**Time.** About 5–6 hours of my own hands-on time across direction, choices, playtests and feedback, including the polish passes. The AI built between those sessions.
+
 **Development flow.** Goal → AI proposes 2–3 options with a recommendation → I pick → AI builds → I play it on the phone → I write down what feels wrong → AI diagnoses and fixes → repeat. Art goes through `generate → contact sheet → pick → auto-clean → in-game check`.
 
 **What did not work at first, and how it was handled.**
